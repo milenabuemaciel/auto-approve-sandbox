@@ -11,8 +11,8 @@ cm()
   .config({
     FakeCacheProfilesConfiguration: {
       Default: cacheProfile("Default", 1, 2),
-      Faster: cacheProfile("Faster", 3, 4),
-      Longer: cacheProfile("Longer", 5, 6),
+      Faster: cacheProfile("Faster", 122, 4),
+      Longer: cacheProfile("Longer", 329081, 6),
       RemoteOnly: cacheProfile("RemoteOnly", 7, 8),
       LongerRemoteOnly: cacheProfile("LongerRemoteOnly", 9, 10),
     },
