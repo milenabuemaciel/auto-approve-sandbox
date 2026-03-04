@@ -2,9 +2,9 @@
    "content": {
       "FakeCacheProfilesConfiguration": {
          "Default": {
-            "LocalCacheTtlSeconds": 1,
+            "LocalCacheTtlSeconds": 3,
             "ProfileName": "Default",
-            "RemoteCacheTtlSeconds": 2
+            "RemoteCacheTtlSeconds": 3
          },
          "Faster": {
             "LocalCacheTtlSeconds": 3,
