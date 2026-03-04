@@ -1,7 +1,6 @@
-name: Auto Approve (order-allocation development)
+name: Auto Approve
 
-on:
-  pull_request:
+on: pull_request
 
 jobs:
   check-files:
@@ -14,15 +13,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get changed files (PR base..head)
+      - name: Get changed files (base..head)
         id: get-changed-files
         run: |
+          git fetch --no-tags --prune --depth=1 origin \
+            ${{ github.event.pull_request.base.sha }} \
+            ${{ github.event.pull_request.head.sha }}
+
           git diff --name-only \
-            "${{ github.event.pull_request.base.sha }}" \
-            "${{ github.event.pull_request.head.sha }}" \
-            | tr '\n' ' ' \
-            | sed 's/ $//' \
-            | awk '{print "changed_files="$0}' >> $GITHUB_OUTPUT
+            ${{ github.event.pull_request.base.sha }} \
+            ${{ github.event.pull_request.head.sha }} \
+            > changed_files.txt
 
       - name: Check if all changed files are in the allowed directories
         id: check
@@ -47,3 +48,5 @@ jobs:
       pull-requests: write
     steps:
       - uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
