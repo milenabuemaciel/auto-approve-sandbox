@@ -12,7 +12,7 @@
             "RemoteCacheTtlSeconds": 4
          },
          "Longer": {
-            "LocalCacheTtlSeconds": 5,
+            "LocalCacheTtlSeconds": 1234,
             "ProfileName": "Longer",
             "RemoteCacheTtlSeconds": 6
          },
