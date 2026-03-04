@@ -1,0 +1,31 @@
+{
+   "content": {
+      "FakeCacheProfilesConfiguration": {
+         "Default": {
+            "LocalCacheTtlSeconds": 1,
+            "ProfileName": "Default",
+            "RemoteCacheTtlSeconds": 2
+         },
+         "Faster": {
+            "LocalCacheTtlSeconds": 3,
+            "ProfileName": "Faster",
+            "RemoteCacheTtlSeconds": 4
+         },
+         "Longer": {
+            "LocalCacheTtlSeconds": 5,
+            "ProfileName": "Longer",
+            "RemoteCacheTtlSeconds": 6
+         },
+         "LongerRemoteOnly": {
+            "LocalCacheTtlSeconds": 9,
+            "ProfileName": "LongerRemoteOnly",
+            "RemoteCacheTtlSeconds": 9
+         },
+         "RemoteOnly": {
+            "LocalCacheTtlSeconds": 7,
+            "ProfileName": "RemoteOnly",
+            "RemoteCacheTtlSeconds": 8
+         }
+      }
+   }
+}

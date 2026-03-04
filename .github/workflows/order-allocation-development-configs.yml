@@ -1,0 +1,49 @@
+name: Auto Approve (order-allocation development)
+
+on:
+  pull_request:
+
+jobs:
+  check-files:
+    runs-on: ubuntu-latest
+    outputs:
+      all_allowed: ${{ steps.check.outputs.all_allowed }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files (PR base..head)
+        id: get-changed-files
+        run: |
+          git diff --name-only \
+            "${{ github.event.pull_request.base.sha }}" \
+            "${{ github.event.pull_request.head.sha }}" \
+            | tr '\n' ' ' \
+            | sed 's/ $//' \
+            | awk '{print "changed_files="$0}' >> $GITHUB_OUTPUT
+
+      - name: Check if all changed files are in the allowed directories
+        id: check
+        run: |
+          all_allowed=true
+
+          for file in ${{ steps.get-changed-files.outputs.changed_files }}; do
+            if [[ ! "$file" =~ ^src/configs/order-allocation/development/ ]] \
+              && [[ ! "$file" =~ ^\.gen/configs/order-allocation/development/ ]]; then
+              all_allowed=false
+              break
+            fi
+          done
+
+          echo "all_allowed=$all_allowed" >> $GITHUB_OUTPUT
+
+  approve:
+    needs: check-files
+    if: needs.check-files.outputs.all_allowed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: hmarr/auto-approve-action@v4
