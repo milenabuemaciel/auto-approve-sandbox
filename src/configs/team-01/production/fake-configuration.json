@@ -7,7 +7,7 @@
             "RemoteCacheTtlSeconds": 2
          },
          "Faster": {
-            "LocalCacheTtlSeconds": 213321,
+            "LocalCacheTtlSeconds": 3,
             "ProfileName": "Faster",
             "RemoteCacheTtlSeconds": 4
          },
